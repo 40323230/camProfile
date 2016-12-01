@@ -41,12 +41,12 @@ def cycloidal(H):
         deltaR += [0]
     for phi in range(0, 90):
         theta = phi*pi/180
-        y = theta*2/pi-sin(4*theta)*H/2/pi
+        y = theta*2/pi*H-sin(4*theta)*H/2/pi
         deltaR += [y]
     for phi in range(0,90):
         deltaR += [H]
     for phi in range(0, 90):
         theta = phi*pi/180
-        y = 1-(theta*2/pi-sin(4*theta)*H/2/pi)
+        y = H-(theta*2/pi*H-sin(4*theta)*H/2/pi)
         deltaR += [y]
     return deltaR

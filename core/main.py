@@ -22,11 +22,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def on_showBase_clicked(self, checked): self.camProfile.setShowBase(checked)
     @pyqtSlot(bool)
     def on_showRoute_clicked(self, checked): self.camProfile.setShowCutterRoute(checked)
-    
     @pyqtSlot(int)
-    def on_rotateBar_valueChanged(self, value):
-        self.camProfile.setAngle(value)
-    
+    def on_rotateBar_valueChanged(self, value): self.camProfile.setAngle(value)
     @pyqtSlot(int)
-    def on_zoomBar_valueChanged(self, value):
-        self.camProfile.setRate(value)
+    def on_zoomBar_valueChanged(self, value): self.camProfile.setRate(value)
+    @pyqtSlot(float)
+    def on_liftVal_valueChanged(self, p0): self.camProfile.setH(p0)
+    @pyqtSlot(float)
+    def on_cutterRadiusVal_valueChanged(self, p0): self.camProfile.setRc(p0)
+    @pyqtSlot(float)
+    def on_baseVal_valueChanged(self, p0): self.camProfile.setBase(p0)

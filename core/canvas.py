@@ -15,9 +15,19 @@ class camProfile(QWidget):
         self.showBase = True
         self.showCutterRoute = True
         self.rotate = 0
+        self.isHarmonic = True
     
+    def setBase(self, base):
+        self.parama['Rb'] = base
+        self.reload()
+    def setH(self, h):
+        self.parama['H'] = h
+        self.reload()
+    def setRc(self, rc):
+        self.parama['Rc'] = rc
+        self.reload()
     def setRate(self, rate):
-        self.parama['rate'] = rate+50
+        self.parama['rate'] = rate+20
         self.update()
     def setAngle(self, angle):
         self.rotate = angle
@@ -29,7 +39,10 @@ class camProfile(QWidget):
         self.showCutterRoute = isShow
         self.update()
     def changeType(self, isHarmonic):
-        if isHarmonic:
+        self.isHarmonic = isHarmonic
+        self.reload()
+    def reload(self):
+        if self.isHarmonic:
             H = harmonic(self.parama['H'])
             Rb = self.parama['Rb']
             Rc = self.parama['Rc']
@@ -78,7 +91,6 @@ class camProfile(QWidget):
             e = self.parama['profile'][i]
             x = e['Rx']*self.parama['rate']
             y = e['Ry']*self.parama['rate']
-            print(x, y)
             painterpath_profile.lineTo(QPointF(x, y))
         painter.drawPath(rotate.map(painterpath_profile))
         #route
@@ -91,9 +103,21 @@ class camProfile(QWidget):
             painterpath_route.moveTo(QPoint(
                 self.parama['cutterRoute'][0]['Rx']*self.parama['rate'],
                 self.parama['cutterRoute'][0]['Ry']*self.parama['rate']))
-            for i in range(len(self.parama['cutterRoute'])):
+            for i in range(len(self.parama['cutterRoute'])-self.rotate):
                 e = self.parama['cutterRoute'][i]
                 x = e['Rx']*self.parama['rate']
                 y = e['Ry']*self.parama['rate']
                 painterpath_route.lineTo(QPointF(x, y))
             painter.drawPath(rotate.map(painterpath_route))
+        #roll
+        pen.setColor(Qt.darkGray)
+        pen.setWidth(3)
+        pen.setStyle(Qt.SolidLine)
+        painter.setPen(pen)
+        r = self.parama['Rc']*self.parama['rate']
+        lastPoint = QPointF(
+            self.parama['cutterRoute'][-self.rotate]['Rx']*self.parama['rate'],
+            self.parama['cutterRoute'][-self.rotate]['Ry']*self.parama['rate'])
+        painterpath_roll = QPainterPath()
+        painterpath_roll.addEllipse(lastPoint, r, r)
+        painter.drawPath(rotate.map(painterpath_roll))

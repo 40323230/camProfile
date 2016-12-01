@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/kmol/桌面/camProfile/core/main.ui'
+# Form implementation generated from reading ui file '/home/ahshoe/Desktop/camProfile/core/main.ui'
 #
 # Created by: PyQt5 UI code generator 5.7
 #
@@ -27,6 +27,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.toCy)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
+        self.label_4 = QtWidgets.QLabel(self.centralWidget)
+        self.label_4.setObjectName("label_4")
+        self.horizontalLayout_2.addWidget(self.label_4)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -40,11 +43,20 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.showRoute)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
+        self.label_3 = QtWidgets.QLabel(self.centralWidget)
+        self.label_3.setObjectName("label_3")
+        self.horizontalLayout.addWidget(self.label_3)
+        self.baseVal = QtWidgets.QDoubleSpinBox(self.centralWidget)
+        self.baseVal.setMinimum(1.0)
+        self.baseVal.setMaximum(10.0)
+        self.baseVal.setProperty("value", 3.0)
+        self.baseVal.setObjectName("baseVal")
+        self.horizontalLayout.addWidget(self.baseVal)
         self.label_2 = QtWidgets.QLabel(self.centralWidget)
         self.label_2.setObjectName("label_2")
         self.horizontalLayout.addWidget(self.label_2)
         self.liftVal = QtWidgets.QDoubleSpinBox(self.centralWidget)
-        self.liftVal.setMinimum(0.01)
+        self.liftVal.setMinimum(1.0)
         self.liftVal.setMaximum(10.0)
         self.liftVal.setProperty("value", 1.0)
         self.liftVal.setObjectName("liftVal")
@@ -53,7 +65,7 @@ class Ui_MainWindow(object):
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
         self.cutterRadiusVal = QtWidgets.QDoubleSpinBox(self.centralWidget)
-        self.cutterRadiusVal.setMinimum(0.01)
+        self.cutterRadiusVal.setMinimum(0.5)
         self.cutterRadiusVal.setMaximum(10.0)
         self.cutterRadiusVal.setProperty("value", 0.5)
         self.cutterRadiusVal.setObjectName("cutterRadiusVal")
@@ -77,8 +89,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.addLayout(self.canvasLayout)
         self.zoomBar = QtWidgets.QSlider(self.centralWidget)
         self.zoomBar.setMinimum(1)
-        self.zoomBar.setMaximum(10)
+        self.zoomBar.setMaximum(50)
         self.zoomBar.setPageStep(1)
+        self.zoomBar.setProperty("value", 30)
         self.zoomBar.setOrientation(QtCore.Qt.Vertical)
         self.zoomBar.setObjectName("zoomBar")
         self.horizontalLayout_4.addWidget(self.zoomBar)
@@ -93,9 +106,11 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.toHar.setText(_translate("MainWindow", "Harmonic"))
         self.toCy.setText(_translate("MainWindow", "Cycloidal"))
+        self.label_4.setText(_translate("MainWindow", "Unit: inch"))
         self.showBase.setText(_translate("MainWindow", "Base circle"))
         self.showRoute.setText(_translate("MainWindow", "Cutter Route"))
-        self.label_2.setText(_translate("MainWindow", "Lift (inch):"))
+        self.label_3.setText(_translate("MainWindow", "Base Circle:"))
+        self.label_2.setText(_translate("MainWindow", "Lift:"))
         self.label.setText(_translate("MainWindow", "Cutter radius:"))
 
 
