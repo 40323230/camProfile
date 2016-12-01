@@ -129,7 +129,10 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
-       <widget class="QSlider" name="horizontalSlider_2">
+       <widget class="QSlider" name="rotateBar">
+        <property name="maximum">
+         <number>360</number>
+        </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -146,7 +149,7 @@
        <layout class="QVBoxLayout" name="canvasLayout"/>
       </item>
       <item>
-       <widget class="QSlider" name="verticalSlider">
+       <widget class="QSlider" name="zoomBar">
         <property name="minimum">
          <number>1</number>
         </property>

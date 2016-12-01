@@ -14,7 +14,20 @@ class camProfile(QWidget):
             }
         self.showBase = True
         self.showCutterRoute = True
+        self.rotate = 0
     
+    def setRate(self, rate):
+        self.parama['rate'] = rate+50
+        self.update()
+    def setAngle(self, angle):
+        self.rotate = angle
+        self.update()
+    def setShowBase(self, isShow):
+        self.showBase = isShow
+        self.update()
+    def setShowCutterRoute(self, isShow):
+        self.showCutterRoute = isShow
+        self.update()
     def changeType(self, isHarmonic):
         if isHarmonic:
             H = harmonic(self.parama['H'])
@@ -36,6 +49,7 @@ class camProfile(QWidget):
         #center circle
         pen.setColor(Qt.red)
         pen.setWidth(3)
+        pen.setStyle(Qt.SolidLine)
         painter.setPen(pen)
         r = 10
         painter.drawEllipse(QPointF(0, 0), r, r)
@@ -43,12 +57,18 @@ class camProfile(QWidget):
         if self.showBase:
             pen.setColor(Qt.cyan)
             pen.setWidth(3)
+            pen.setStyle(Qt.DashLine)
             painter.setPen(pen)
             r = self.parama['Rb']*self.parama['rate']
             painter.drawEllipse(QPointF(0, 0), r, r)
+        #rotate
+        rotate = QTransform()
+        rotate.translate(0, 0)
+        rotate.rotate(self.rotate)
         #profile
         pen.setColor(Qt.blue)
         pen.setWidth(5)
+        pen.setStyle(Qt.SolidLine)
         painter.setPen(pen)
         painterpath_profile = QPainterPath()
         painterpath_profile.moveTo(QPoint(
@@ -60,11 +80,12 @@ class camProfile(QWidget):
             y = e['Ry']*self.parama['rate']
             print(x, y)
             painterpath_profile.lineTo(QPointF(x, y))
-        painter.drawPath(painterpath_profile)
+        painter.drawPath(rotate.map(painterpath_profile))
         #route
         if self.showCutterRoute:
             pen.setColor(Qt.green)
             pen.setWidth(3)
+            pen.setStyle(Qt.DashLine)
             painter.setPen(pen)
             painterpath_route = QPainterPath()
             painterpath_route.moveTo(QPoint(
@@ -75,4 +96,4 @@ class camProfile(QWidget):
                 x = e['Rx']*self.parama['rate']
                 y = e['Ry']*self.parama['rate']
                 painterpath_route.lineTo(QPointF(x, y))
-            painter.drawPath(painterpath_route)
+            painter.drawPath(rotate.map(painterpath_route))

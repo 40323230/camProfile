@@ -15,9 +15,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.camProfile.changeType(True)
     
     @pyqtSlot()
-    def on_toHar_clicked(self):
-        self.camProfile.changeType(True)
-    
+    def on_toHar_clicked(self): self.camProfile.changeType(True)
     @pyqtSlot()
-    def on_toCy_clicked(self):
-        self.camProfile.changeType(False)
+    def on_toCy_clicked(self): self.camProfile.changeType(False)
+    @pyqtSlot(bool)
+    def on_showBase_clicked(self, checked): self.camProfile.setShowBase(checked)
+    @pyqtSlot(bool)
+    def on_showRoute_clicked(self, checked): self.camProfile.setShowCutterRoute(checked)
+    
+    @pyqtSlot(int)
+    def on_rotateBar_valueChanged(self, value):
+        self.camProfile.setAngle(value)
+    
+    @pyqtSlot(int)
+    def on_zoomBar_valueChanged(self, value):
+        self.camProfile.setRate(value)
