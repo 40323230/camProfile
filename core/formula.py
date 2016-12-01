@@ -7,7 +7,6 @@ def profile(Rb, deltaR):
         Rx = (Rb+deltaR[phi])*sin(theta)
         Ry = (Rb+deltaR[phi])*cos(theta)
         profile_list += [{'Rx':Rx, 'Ry':-Ry}]
-    #print(profile_list)
     return profile_list
 
 def cutterRuote(Rb, deltaR, Rc):

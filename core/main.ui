@@ -156,6 +156,13 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Rotate Angle:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QSlider" name="rotateBar">
         <property name="maximum">
          <number>360</number>
@@ -166,7 +173,14 @@
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="spinBox"/>
+       <widget class="QSpinBox" name="rotateAngle">
+        <property name="maximum">
+         <number>360</number>
+        </property>
+        <property name="singleStep">
+         <number>10</number>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
