@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
+from core.QtModules import pyqtSlot, QMainWindow
 from .Ui_main import Ui_MainWindow
 from .canvas import CamProfile
 
@@ -14,16 +12,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.setupUi(self)
-        self.cam_profile = CamProfile()
+        self.cam_profile = CamProfile(self)
         self.canvas_layout.addWidget(self.cam_profile)
 
     @pyqtSlot(name='on_harmonic_mode_clicked')
     def __set_harmonic(self):
-        self.cam_profile.change_type(0)
+        self.cam_profile.set_mode(0)
 
     @pyqtSlot(name='on_cycloidal_mode_clicked')
     def __set_cycloidal(self):
-        self.cam_profile.change_type(1)
+        self.cam_profile.set_mode(1)
 
     @pyqtSlot(bool, name='on_show_base_clicked')
     def __set_show_base(self, checked: bool):
