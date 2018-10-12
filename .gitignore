@@ -90,3 +90,6 @@ ENV/
 
 # Eric 6 cache
 .eric6project/
+
+# PyCharm cache
+.idea/

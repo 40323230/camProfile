@@ -4,35 +4,56 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from .Ui_main import Ui_MainWindow
-from .canvas import camProfile
+from .canvas import CamProfile
+
 
 class MainWindow(QMainWindow, Ui_MainWindow):
-    def __init__(self, parent=None):
-        super(MainWindow, self).__init__(parent)
+
+    """Main window."""
+
+    def __init__(self):
+        super(MainWindow, self).__init__()
         self.setupUi(self)
-        self.camProfile = camProfile()
-        self.canvasLayout.addWidget(self.camProfile)
-        self.camProfile.changeType(True)
-    
-    @pyqtSlot()
-    def on_toHar_clicked(self): self.camProfile.changeType(True)
-    @pyqtSlot()
-    def on_toCy_clicked(self): self.camProfile.changeType(False)
-    @pyqtSlot(bool)
-    def on_showBase_clicked(self, checked): self.camProfile.setShowBase(checked)
-    @pyqtSlot(bool)
-    def on_showRoute_clicked(self, checked): self.camProfile.setShowCutterRoute(checked)
-    @pyqtSlot(int)
-    def on_zoomBar_valueChanged(self, value): self.camProfile.setRate(value)
-    @pyqtSlot(float)
-    def on_liftVal_valueChanged(self, p0): self.camProfile.setH(p0)
-    @pyqtSlot(float)
-    def on_cutterRadiusVal_valueChanged(self, p0): self.camProfile.setRc(p0)
-    @pyqtSlot(float)
-    def on_baseVal_valueChanged(self, p0): self.camProfile.setBase(p0)
-    @pyqtSlot(int)
-    def on_rotateAngle_valueChanged(self, p0): self.rotateBar.setValue(p0)
-    @pyqtSlot(int)
-    def on_rotateBar_valueChanged(self, value):
-        self.rotateAngle.setValue(value)
-        self.camProfile.setAngle(value)
+        self.cam_profile = CamProfile()
+        self.canvas_layout.addWidget(self.cam_profile)
+
+    @pyqtSlot(name='on_harmonic_mode_clicked')
+    def __set_harmonic(self):
+        self.cam_profile.change_type(0)
+
+    @pyqtSlot(name='on_cycloidal_mode_clicked')
+    def __set_cycloidal(self):
+        self.cam_profile.change_type(1)
+
+    @pyqtSlot(bool, name='on_show_base_clicked')
+    def __set_show_base(self, checked: bool):
+        self.cam_profile.set_show_base(checked)
+
+    @pyqtSlot(bool, name='on_show_route_clicked')
+    def __set_show_route(self, checked: bool):
+        self.cam_profile.set_show_cutter_route(checked)
+
+    @pyqtSlot(int, name='on_zoom_bar_valueChanged')
+    def __set_zoom(self, value: int):
+        self.cam_profile.set_rate(value)
+
+    @pyqtSlot(float, name='on_lift_valueChanged')
+    def __set_lift(self, p0: float):
+        self.cam_profile.set_h(p0)
+
+    @pyqtSlot(float, name='on_cutter_radius_valueChanged')
+    def __set_cutter_radius(self, p0: float):
+        self.cam_profile.set_rc(p0)
+
+    @pyqtSlot(float, name='on_baseVal_valueChanged')
+    def __set_base(self, p0: float):
+        self.cam_profile.set_base(p0)
+
+    @pyqtSlot(int, name='on_rotate_angle_valueChanged')
+    def __set_rotate_angle(self, p0: int):
+        self.rotate_bar.setValue(p0)
+
+    @pyqtSlot(int, name='on_rotate_bar_valueChanged')
+    def __set_rotate(self, value: int):
+        self.rotate_angle.setValue(value)
+        self.cam_profile.set_angle(value)
