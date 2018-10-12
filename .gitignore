@@ -87,3 +87,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Eric 6 cache
+.eric6project/
